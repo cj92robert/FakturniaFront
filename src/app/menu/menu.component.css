@@ -1,0 +1,46 @@
+
+.navbar-custom{
+  background: rgb(0,33,36);
+  background: linear-gradient(0deg, rgba(0,33,36,1) 0%, rgba(3,86,139,1) 8%, rgba(6,67,184,1) 30%, rgba(3,20,149,1) 50%, rgba(0,202,255,1) 100%);
+  color: black;
+  position: sticky;
+  top: 0px;
+}
+
+
+.nav-item-custom a{
+  color: white;
+  transition: all 0.1s ease-in-out;
+
+}
+.nav-item-custom:hover a{
+  color: orange;
+  transform: scale(1.1);
+  }
+
+
+.dropdown-menu-custom {
+  background-color: aliceblue;
+
+}
+.dropdown-menu-custom a{
+  color: black !important;
+  transform: none !important;
+  transition: transform 0.1s ease-in-out;
+
+}
+.dropdown-menu-custom a:hover{
+  color: orange !important;
+  background: rgb(0,33,36);
+  background: linear-gradient(0deg, rgba(0,33,36,1) 0%, rgba(3,86,139,1) 8%, rgba(6,67,184,1) 30%, rgba(3,20,149,1) 50%, rgba(0,202,255,1) 100%);
+  transform: scale(1.05) !important;
+
+}
+.navbar-brand{
+  letter-spacing: 2px;
+  font-family: Verdana;
+}
+
+.btn-custom{
+  margin-right: 5px;
+}

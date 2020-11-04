@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+  <a class="navbar-brand" >Fakturnia</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" routerLink="/start" >Start <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" routerLink="/generate_invoice">Wystaw fakture</a>
+      </li>
+      <li class="nav-item dropdown nav-item-custom">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dokumenty
+        </a>
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Wszystkie</a>
+          <a class="dropdown-item" href="#">Zapłacone</a>
+          <a class="dropdown-item" href="#">Do zapłaty</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Robocze</a>
+
+        </div>
+      </li>
+      <li class="nav-item dropdown nav-item-custom ">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Klienci
+        </a>
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="navbarDropdown2">
+          <a class="dropdown-item" routerLink="/newcustomer">Dodaj Klienta</a>
+          <a class="dropdown-item" routerLink="/customerlist">Lista Klientów</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Importuj z CSV</a>
+          <a class="dropdown-item" href="#">Exportuj do CSV</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown nav-item-custom ">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Ustawienia
+        </a>
+        <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="navbarDropdown3">
+          <a class="dropdown-item" href="#">Dane Osobowe</a>
+          <a class="dropdown-item" href="#">Konta Bankowe</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Dane Logowania</a>
+        </div>
+      </li>
+      <li class="nav-item nav-item-custom">
+        <a class="nav-link" routerLink="/contact" tabindex="-1" >Kontakt</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+     <span *ngIf="isNotLogged()">
+       <button class="btn btn-outline-warning my-2 my-sm-0 btn-custom"  type = "button" routerLink="/login">Zaloguj</button>
+       <button class="btn btn-outline-warning my-2 my-sm-0 btn-custom"  type = "button" routerLink="/register">Rejstracja</button>
+     </span>
+      <span *ngIf="!isNotLogged()">
+       <button (click)="logOut()" class="btn btn-outline-warning my-2 my-sm-0 btm-custom" type = "button" >Wyloguj</button>
+      </span>
+    </form>
+  </div>
+</nav>
