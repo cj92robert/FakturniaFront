@@ -1,0 +1,21 @@
+
+<div class="container">
+
+  <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" ngForm>
+  <div class="form-group" >
+    <label for="loginInput">Login</label>
+    <input type="text" class="form-control" id="loginInput"  name="username" ngModel>
+
+  </div>
+  <div class="form-group">
+    <label for="passwordInput">Hasło</label>
+    <input type="password" class="form-control" id="passwordInput" name="password" ngModel>
+  </div>
+  <button type="submit" class="btn btn-primary" id="loginbutton">Zaloguj</button>
+</form>
+<br/>
+  <div *ngIf="status.length>0" class="alert alert-danger">{{status}}</div>
+
+
+</div>
+

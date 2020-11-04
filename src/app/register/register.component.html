@@ -1,0 +1,60 @@
+<div class="container">
+
+  <form #loginForm="ngForm" (ngSubmit)="register(loginForm)" ngForm>
+    <div class="form-group" >
+      <label for="loginInput">Login</label>
+      <input type="text" class="form-control input-r" id="loginInput"  name="username" #username="ngModel" ngModel required minlength="6">
+     <div *ngIf="username.invalid && ( username.touched)" class="alert alert-danger">
+       <div *ngIf="username.errors.required">
+        Nick jest wymagany
+      </div>
+      <div *ngIf="username.errors.minlength">
+        Nick nie może być krótszy niz 6 znaków.
+      </div>
+     </div>
+    </div>
+
+    <div class="form-group" >
+      <label for="emailInput">Email</label>
+      <input type="text" class="form-control input-r" id="emailInput"   name="email" #email="ngModel" ngModel required email>
+
+      <div *ngIf="email.invalid && ( email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Email jest wymagany
+        </div>
+        <div *ngIf="email.errors.email">
+          Wpisz poprawny adres email.
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label for="passwordInput">Hasło</label>
+      <input type="password" class="form-control input-r" id="passwordInput" name="password" #password="ngModel" ngModel minlength="8" required>
+
+      <div *ngIf="password.invalid && ( password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Hasło jest wymagane
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Hasło musi miec przynajmniej 8 znakow.
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label for="passwordRepeatInput">Powtórz hasło</label>
+      <input type="password" class="form-control input-r" id="passwordRepeatInput" name="passwordRepeat" #passwordRepeat="ngModel" ngModel>
+
+      <div *ngIf="passwordRepeat.value!=password.value && ( passwordRepeat.touched)" class="alert alert-danger">
+
+
+          Hasła musza być jednakowe.
+
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary " id="Zarejstruj">Zarejstruj</button>
+  </form>
+
+</div>
