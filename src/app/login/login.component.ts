@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {UserService} from '../user.service';
 import {UsernameAndPassword} from '../Models/UsernameAndPassword';
 import {Router} from '@angular/router';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-login',

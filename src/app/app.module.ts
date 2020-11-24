@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -17,11 +17,14 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {AuthInterceptor} from './auth.interceptor';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {ToastModule} from 'primeng/toast';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import {PaginatorModule} from 'primeng/paginator';
+import {registerLocaleData} from '@angular/common';
+import localPl from '@angular/common/locales/pl';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
     FormsModule,
     HttpClientModule,
     ToastModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PaginatorModule
   ],
   providers: [
     {      provide: LocationStrategy, useClass: PathLocationStrategy},

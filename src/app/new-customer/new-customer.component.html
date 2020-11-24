@@ -1,68 +1,95 @@
+
+
 <div class="container">
-
-  <form #newCustomerForm="ngForm" (ngSubmit)="addCustomer(newCustomerForm)" ngForm>
-    <div class="form-group" >
-      <label for="shortNameInput">Nazwa skrócona</label>
+  <h1>Dodaj nowego klienta</h1>
+  <form #newCustomerForm="ngForm"  (ngSubmit)="addCustomer(newCustomerForm)" ngForm >
+    <div class="form-group row" >
+      <label for="shortNameInput" class="col-sm-2 col-form-label">Nazwa skrócona</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="shortNameInput"  name="shortName" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="longNameInput">Pełna nazwa</label>
-      <input type="text" class="form-control" id="longNameInput"  name="longName" ngModel>
+    <div class="form-group row " >
+      <label for="longNameInput" class="col-sm-2 col-form-label">Pełna nazwa</label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="longNameInput"  name="longName" ngModel >
+      </div>
     </div>
 
 
-    <div class="form-group" >
-      <label for="phoneInput">Telefon</label>
+    <div class="form-group row" >
+      <label for="phoneInput" class="col-sm-2 col-form-label">Telefon</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="phoneInput"  name="phone" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="idCardNumberInput">Seria, numer dowodu osobistego</label>
+    <div class="form-group row" >
+      <label for="idCardNumberInput" class="col-sm-2 col-form-label">Seria, numer dowodu osobistego</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="idCardNumberInput"  name="idCardNumber" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="addressInput">Adres</label>
+    <div class="form-group row" >
+      <label for="addressInput" class="col-sm-2 col-form-label">Adres</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="addressInput"  name="address" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="cityInput">Miasto</label>
+    <div class="form-group row" >
+      <label for="cityInput" class="col-sm-2 col-form-label">Miasto</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="cityInput"  name="city" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="postcodeInput">Kod pocztowy</label>
+    <div class="form-group row" >
+      <label for="postcodeInput" class="col-sm-2 col-form-label">Kod pocztowy</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="postcodeInput"  name="postcode" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="emailInput">e-mail</label>
+    <div class="form-group row" >
+      <label for="emailInput" class="col-sm-2 col-form-label">e-mail</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="emailInput"  name="email" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="nipInput">Nip</label>
+    <div class="form-group row" >
+      <label for="nipInput" class="col-sm-2 col-form-label">Nip</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="nipInput"  name="nip" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="regonInput">Regon</label>
+    <div class="form-group row" >
+      <label for="regonInput" class="col-sm-2 col-form-label">Regon</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="regonInput"  name="regon" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="bankAccountInput">Konto bankowe</label>
+    <div class="form-group row" >
+      <label for="bankAccountInput" class="col-sm-2 col-form-label">Konto bankowe</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="bankAccountInput"  name="bankAccount" ngModel>
+      </div>
     </div>
 
-    <div class="form-group" >
-      <label for="descriptionInput">Opis klienta</label>
+    <div class="form-group row" >
+      <label for="descriptionInput" class="col-sm-2 col-form-label">Opis klienta</label>
+      <div class="col-sm-10">
       <input type="text" class="form-control" id="descriptionInput"  name="description" ngModel>
+      </div>
     </div>
-
+    <div class="button-div">
     <button type="submit" class="btn btn-primary" id="addcustomer">dodaj klienta</button>
+    </div>
   </form>
   <br/>
 

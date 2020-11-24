@@ -1,1 +1,35 @@
-<p>customer-list works!</p>
+<div class="container">
+<br/>
+<h1>Lista klientów</h1>
+
+Ilość klientów {{amountOfCustomer}}
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col" style="width:5%">#</th>
+    <th scope="col" style="width:10%">Skrócona nazwa</th>
+    <th scope="col" style="width:15%">Pełna nazwa</th>
+    <th scope="col" style="width:10%">Nip</th>
+    <th scope="col" style="width:10%">Edytuj/Usuń</th>
+  </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let cust of customers">
+    <tr scope="row">
+      <td>{{cust.id}}</td>
+      <td>{{cust.shortName}}</td>
+      <td>{{cust.longName}}</td>
+
+      <td>{{cust.nip}}</td>
+      <td><button type="button" class="btn btn-secondary" ><i class="fas fa-edit"></i></button> &nbsp;
+        <button type="button" class="btn btn-secondary"  ><i class="fas fa-trash-alt"></i></button></td>
+    </tr>
+    </ng-container>
+
+  </tbody>
+
+
+</table>
+  <p-paginator [rows]="10" (onPageChange)="paginate($event)" [totalRecords]="amountOfCustomer" [rowsPerPageOptions]="[10,15,20]"></p-paginator>
+</div>

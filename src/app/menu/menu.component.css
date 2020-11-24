@@ -5,6 +5,7 @@
   color: black;
   position: sticky;
   top: 0px;
+  z-index: 100;
 }
 
 
@@ -27,7 +28,6 @@
   color: black !important;
   transform: none !important;
   transition: transform 0.1s ease-in-out;
-
 }
 .dropdown-menu-custom a:hover{
   color: orange !important;

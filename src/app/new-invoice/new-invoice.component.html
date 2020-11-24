@@ -1,1 +1,202 @@
-<p>new-invoice works!</p>
+<div class="container">
+  <h1>Nowa faktura</h1>
+  <div >
+
+    <div class="form-group row">
+
+      <label for="dateCreationInput" class="col-sm-2 col-form-label">Data wystawienia</label>
+      <div class="col-sm-2">
+        <input type="date" class="form-control" id="dateCreationInput"  [(ngModel)]="invoice.dateOfCreation" >
+      </div>
+
+      <label for="dateSaleInput" class="col-sm-2 col-form-label">Data sprzedaży</label>
+      <div class="col-sm-2">
+        <input type="date" class="form-control" id="dateSaleInput"  [(ngModel)]="invoice.dateOfSale" >
+      </div>
+      <label for="placeInput" class="col-sm-2 col-form-label">Miejsce</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" id="placeInput"  [(ngModel)]="invoice.placeOfCreation" >
+      </div>
+    </div>
+
+
+    <div class="form-group row" >
+      <div class="col-sm-4"></div><label for="numberInput" class="col-sm-2 col-form-label">Numer Faktury</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" id="numberInput"  [(ngModel)]="invoice.numberOfInvoice">
+      </div>
+    </div>
+
+
+
+    <div class="form-group row" >
+      <label for="sellerNameInput" class="col-sm-1 col-form-label">Sprzedawca</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="sellerNameInput"  [(ngModel)]="invoice.sellerData.name">
+      </div>
+
+      <label for="customerNameInput" class="col-sm-1 col-form-label">Nabywca</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" style="text-align: right" id="customerNameInput" [(ngModel)]="invoice.customerDate.name">
+      </div>
+    </div>
+
+
+    <div class="form-group row" >
+      <label for="sellerNipInput" class="col-sm-1 col-form-label">Nip</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="sellerNipInput" [(ngModel)]="invoice.sellerData.nip">
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <label for="customerNipInput" class="col-sm-1 col-form-label">Nip</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="customerNipInput"  [(ngModel)]="invoice.customerDate.nip">
+      </div>
+    </div>
+
+
+    <div class="form-group row" >
+      <label for="sellerStreetInput" class="col-sm-1 col-form-label">Ulica</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="sellerStreetInput"  [(ngModel)]="invoice.sellerData.street">
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <label for="customerStreetInput" class="col-sm-1 col-form-label">Ulica</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="customerStreetInput" [(ngModel)]="invoice.customerDate.street">
+      </div>
+    </div>
+
+
+    <div class="form-group row" >
+      <label for="citySellerInput" class="col-sm-1 col-form-label">Miasto/kod</label>
+      <div class="col-sm-5"><div class="row">
+        <div class="col-sm-9">
+        <input type="text" class="form-control" id="citySellerInput" [(ngModel)]="invoice.sellerData.city">
+      </div>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" id="sellerCodeInput"  [(ngModel)]="invoice.sellerData.postCode">
+      </div>
+      </div>
+      </div>
+
+      <label for="cityCustomerInput" class="col-sm-1 col-form-label">Miasto/kod</label>
+      <div class="col-sm-5"><div class="row">
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="cityCustomerInput"  [(ngModel)]="invoice.customerDate.city">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" id="customerCodeInput"  [(ngModel)]="invoice.customerDate.postCode" >
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+    <table class="table">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col" style="width: 30%">nazwa</th>
+        <th scope="col" style="width: 10%" >jm</th>
+        <th scope="col" style="width: 10%">ilosc</th>
+        <th scope="col" style="width: 10%">cena netto</th>
+        <th scope="col" style="width: 15%">wartosc netto</th>
+        <th scope="col" style="width: 10%">stawka Vat</th>
+        <th scope="col" style="width: 15%">wartosc brutto</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container  *ngFor="let item of listItem; let i = index" >
+      <tr>
+        <td style="width: 30%"><input type="text"  [(ngModel)]="item.name" class="form-control"></td>
+        <td style="width: 10%"><select class="form-control" [value]="item.typeUnit">
+          <option value="szt">szt</option>
+          <option value="kg">kg</option>
+          <option value="m">m</option>
+          <option value="t">t</option>
+        </select></td>
+      <td style="width: 10%"><input type="text" name="a" class="form-control" [(ngModel)]="item.quantity" ></td>
+      <td style="width: 10%"><input type="text" name="b" class="form-control" [(ngModel)]="item.priceForUnit"></td>
+      <td style="width: 15%"><input type="text" name="v" class="form-control" [value]="item.quantity*item.priceForUnit|number: '1.2-2'"></td>
+        <td style="width: 10%"><select  class="form-control"  name="i4" [(ngModel)]="item.taxRate">
+          <option value="1.23" selected>23%</option>
+          <option value="1.08">8%</option>
+          <option value="1.05">5%</option>
+          <option value="1">0%</option>
+        </select></td>
+      <td style="width: 15%"><input type="text" class="form-control" name="i5" [value]="item.taxRate*item.quantity*item.priceForUnit|number: '1.2-2'"></td>
+      </tr>
+      </ng-container>
+
+      <button type="button"  class="btn btn-primary" style="margin-bottom: 5px" id="addPosition" (click)="addItem()">Dodaj pozycje</button>
+
+      <tr style="height: 100px"></tr>
+      <tr style="height: 100px">
+        <td>Razem</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{totalNetto()|number: '1.2-2'}} zł</td>
+        <td>{{totalBrutto()-totalNetto()|number: '1.2-2'}} zł</td>
+        <td>{{totalBrutto()|number: '1.2-2'}} zł</td>
+      </tr>
+      </tbody>
+    </table>
+
+<div class="row">
+  <div class="col-sm-3">
+  <p>Status <select  class="form-control" [(ngModel)]="invoice.statusOfPayment">
+    <option value="PAID">Zapłacone</option>
+    <option value="ISNOTPAID">Niezapłacone</option>
+
+  </select>
+  </p>
+  </div>
+
+  <div class="col-sm-3">
+    <p>Zapłacono <input type="text"  class="form-control" id="paid" [(ngModel)]="invoice.paid">
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <p>Data zapłaty <input type="date"  class="form-control" id="datePayed" [(ngModel)]="invoice.dateOfPayment">
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <p>Opis zapłaty <input type=" text"   class="form-control" [(ngModel)]="invoice.descriptionOfPayment">
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <p>Forma zapłaty <select  class="form-control" [(ngModel)]="invoice.wayOfPayment">
+      <option value="CASH">Gotówka</option>
+      <option value="TRANSFER" >Przelew</option>
+
+    </select>
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <p>Termin płatności <input type="date"  class="form-control" id="datePayment" [(ngModel)]="invoice.dayOfTransfer">
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <p>Numer konta <input type=" text"   class="form-control" [(ngModel)]="invoice.accountNumber">
+    </p>
+  </div>
+  <div class="col-sm-12">
+    <p>Uwagi <input type=" text"   class="form-control" [(ngModel)]="invoice.description">
+    </p>
+  </div>
+
+
+</div>
+    <div class="button-div">
+
+
+      <button type="button" class="btn btn-primary" id="addInvoice" (click)="newInvoice()">wystaw fakture</button>
+    </div>
+
+  <br/>
+
+
+
+</div>
