@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
 import {PositionOnInvoice} from '../Models/PositionOnInvoice';
-import {Invoice} from '../Models/Invoice';
 import {InvoiceService} from '../services/invoice.service';
 import {MessageService} from 'primeng/api';
+import {Invoice} from '../Models/Invoice';
 import {DateCompany} from '../Models/DateCompany';
+import {formatDate} from '@angular/common';
 import WayOfPaymentEnum = Invoice.WayOfPaymentEnum;
 import StatusOfPaymentEnum = Invoice.StatusOfPaymentEnum;
-import {formatDate} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-new-invoice',
-  templateUrl: './new-invoice.component.html',
-  styleUrls: ['./new-invoice.component.css']
+  selector: 'app-edit-invoice',
+  templateUrl: './edit-invoice.component.html',
+  styleUrls: ['./edit-invoice.component.css']
 })
-export class NewInvoiceComponent implements OnInit {
+export class EditInvoiceComponent implements OnInit {
   public listItem: Array<PositionOnInvoice>;
   public  invoice;
   today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-
-  constructor(private invoiceService: InvoiceService, private messageService: MessageService) {
+  paramQuery;
+  constructor(private location: Location, private activatedRoute: ActivatedRoute, private invoiceService: InvoiceService, private messageService: MessageService) {
     this.invoice = new Invoice();
     this.invoice.sellerData = new DateCompany();
     this.invoice.customerDate = new DateCompany();
@@ -35,11 +36,19 @@ export class NewInvoiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.addItem();
-  }
-
-  addInvoice(newInvoiceForm: NgForm): void {
-
+    this.activatedRoute.params.subscribe(data => this.paramQuery = data.id);
+    this.invoiceService.getInvoice(this.paramQuery).subscribe(res => {
+      this.invoice = res;
+      this.listItem = this.invoice.positionOnInvoiceList;
+      this.invoice.dateOfCreation = formatDate(this.invoice.dateOfCreation, 'yyyy-MM-dd', 'pl');
+      this.invoice.dateOfSale = formatDate(this.invoice.dateOfSale, 'yyyy-MM-dd', 'pl');
+      this.invoice.dateOfPayment = formatDate(this.invoice.dateOfPayment, 'yyyy-MM-dd', 'pl');
+      this.listItem = this.listItem.map(item => {
+        item.taxRate = item.taxRate * 0.01 + 1;
+        return item;
+      });
+      console.log(res);
+    });
   }
 
   addItem(): void {
@@ -53,7 +62,7 @@ export class NewInvoiceComponent implements OnInit {
 
   }
   totalBrutto(): number{
-     return this.listItem.map(val => {
+    return this.listItem.map(val => {
       return val.quantity * val.priceForUnit * val.taxRate;
     }).reduce((acc, cur) => acc + cur);
   }
@@ -70,14 +79,21 @@ export class NewInvoiceComponent implements OnInit {
       return r;
     });
     this.invoiceService.addInvoice(this.invoice).subscribe(res => {
-      this.messageService.add({ severity: 'success', summary: 'Dodano', detail: 'Dodano nową fakture.'});
+      this.messageService.add({ severity: 'success', summary: 'Dodano', detail: 'Zaktualizowano fakture.'});
+      this.listItem = this.listItem.map(item => {
+        item.taxRate = item.taxRate * 0.01 + 1;
+        return item;
+      });
     }, error => {
-      this.messageService.add({ severity: 'error', summary: 'Błąd', detail: 'Nie udało się dodać faktury.'});
+      this.messageService.add({ severity: 'error', summary: 'Błąd', detail: 'Nie udało się zaktualizować faktury.'});
     });
   }
+
   delete(item: PositionOnInvoice): void {
     this.listItem = this.listItem.filter( it => it !== item);
   }
 
-
+  undo(): void{
+    this.location.back();
+  }
 }

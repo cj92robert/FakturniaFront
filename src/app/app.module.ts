@@ -25,6 +25,9 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {registerLocaleData} from '@angular/common';
 import localPl from '@angular/common/locales/pl';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import localPl from '@angular/common/locales/pl';
     LoginComponent,
     PageNotFoundComponent,
     NewCustomerComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    InvoiceListComponent,
+    EditInvoiceComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,9 @@ import localPl from '@angular/common/locales/pl';
     {      provide: LocationStrategy, useClass: PathLocationStrategy},
     {provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
-    multi: true}],
+    multi: true},
+    {provide: LOCALE_ID, useValue: "pl"}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+registerLocaleData(localPl, "pl");

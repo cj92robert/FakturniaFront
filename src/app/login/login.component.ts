@@ -24,15 +24,15 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   loginUser(loginForm: NgForm): void{
     console.log(loginForm.value);
     this.userService.login(new UsernameAndPassword(loginForm.value.username, loginForm.value.password)).subscribe((resp) => {
-      localStorage.setItem('user', loginForm.value.username);
+      sessionStorage.setItem('user', loginForm.value.username);
       this.status = 'sukces';
       this.messageService.add({ severity: 'success', summary: 'Sukces', detail: 'Logowanie przebiegło pomyślnie'});
       this.router.navigate(['/start']);
     }, () => {
       this.status = 'Błedne hasło lub login';
       this.messageService.add({ severity: 'error', summary: 'Blad', detail: 'Nie udało sie zalogować'});
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+      sessionStorage.removeItem('token');
       }
     );
   }

@@ -17,11 +17,12 @@
           Dokumenty
         </a>
         <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Wszystkie</a>
-          <a class="dropdown-item" href="#">Zapłacone</a>
-          <a class="dropdown-item" href="#">Do zapłaty</a>
+          <a class="dropdown-item" routerLink="/invoicelist/all">Wszystkie</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Robocze</a>
+          <a class="dropdown-item" routerLink="/invoicelist/paid">Zapłacone</a>
+          <a class="dropdown-item" routerLink="/invoicelist/notpaid">Do zapłaty</a>
+
+
 
         </div>
       </li>
@@ -55,7 +56,7 @@
     <form class="form-inline my-2 my-lg-0">
      <span *ngIf="isNotLogged()">
        <button class="btn btn-outline-warning my-2 my-sm-0 btn-custom"  type = "button" routerLink="/login">Zaloguj</button>
-       <button class="btn btn-outline-warning my-2 my-sm-0 btn-custom"  type = "button" routerLink="/register">Rejstracja</button>
+       <button class="btn btn-outline-warning my-2 my-sm-0 btn-custom"  type = "button" routerLink="/register">Rejestracja</button>
      </span>
       <span *ngIf="!isNotLogged()">
        <button (click)="logOut()" class="btn btn-outline-warning my-2 my-sm-0 btm-custom" type = "button" >Wyloguj</button>

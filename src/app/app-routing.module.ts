@@ -9,6 +9,8 @@ import {RegisterComponent} from './register/register.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {NewCustomerComponent} from './new-customer/new-customer.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
+import {InvoiceListComponent} from './invoice-list/invoice-list.component';
+import {EditInvoiceComponent} from './edit-invoice/edit-invoice.component';
 
 
 const routes: Routes = [
@@ -16,10 +18,12 @@ const routes: Routes = [
   {path : 'contact', component: ContactComponent},
   {path : 'generate_invoice', component: NewInvoiceComponent},
   {path : 'invoice/:id', component: ViewInvoiceComponent},
+  {path : 'invoicelist/:filter', component: InvoiceListComponent},
   {path : 'login' , component: LoginComponent, data: {bodyClass: 'login'}},
   {path : 'register', component: RegisterComponent},
   {path : 'newcustomer', component: NewCustomerComponent},
   {path : 'customerlist', component: CustomerListComponent},
+  {path: 'editinvoice/:id' , component: EditInvoiceComponent},
   {path: '', redirectTo: 'start', pathMatch: 'full' },
   {path: '**', component: PageNotFoundComponent}
 ];

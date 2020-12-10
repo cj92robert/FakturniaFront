@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {SERVER_API_URL} from '../appcostants';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import {Observable} from 'rxjs';
 export class CustomerService {
 
   constructor(private httpClient: HttpClient) { }
-  url = 'http://localhost:80/api/v1/customer/';
+  url = SERVER_API_URL + 'api/v1/customer/';
 
 
   addCustomer(customer): Observable<any> {

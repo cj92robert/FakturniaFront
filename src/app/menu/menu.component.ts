@@ -15,12 +15,12 @@ export class MenuComponent implements OnInit {
   }
 
   isNotLogged(): boolean {
-    return localStorage.getItem('user') == null;
+    return sessionStorage.getItem('user') == null;
   }
 
   logOut(): void {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     this.messageService.add({ severity: 'info', summary: 'Informacja', detail: 'Wylogowano'});
     this.router.navigate(['/start']);
   }

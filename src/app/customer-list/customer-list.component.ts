@@ -30,7 +30,7 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
-  paginate($event: any) {
+  paginate($event: any): void {
     this.page = $event.page;
     this.size = $event.rows;
     this.getCustomers();

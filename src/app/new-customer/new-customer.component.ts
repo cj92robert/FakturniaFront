@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Customer} from '../Models/Customer';
 import {CustomerService} from '../services/customer.service';
@@ -10,7 +10,7 @@ import {MessageService} from 'primeng/api';
   templateUrl: './new-customer.component.html',
   styleUrls: ['./new-customer.component.css']
 })
-export class NewCustomerComponent implements OnInit {
+export class NewCustomerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private customerService: CustomerService, private router: Router, private messageService: MessageService) { }
 
@@ -38,5 +38,14 @@ export class NewCustomerComponent implements OnInit {
     }, error => {
       this.messageService.add({severity: 'error', summary: 'Bład', detail: 'Nipowiodlo się dodawanie nowego klienta'});
     });
+  }
+
+
+  ngAfterViewInit(): void {
+    document.querySelector('body').classList.add('login');
+  }
+
+  ngOnDestroy(): void {
+    document.querySelector('body').classList.remove('login');
   }
 }

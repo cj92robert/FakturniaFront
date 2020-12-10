@@ -1,0 +1,66 @@
+<div class="container">
+  <br/>
+  <h1>Lista faktur</h1>
+
+  Ilość faktur {{amountOfInvoice}}
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col" style="width:5%">Numer</th>
+      <th scope="col" style="width:10%">Data</th>
+      <th scope="col" style="width:15%">Klient</th>
+      <th scope="col" style="width:10%">Wartosc</th>
+      <th scope="col" style="width:10%">Status</th>
+
+      <th scope="col" style="width:10%">Edytuj/Usuń</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let invoice of listInvoice"  >
+      <tr scope="row" class="invoice">
+        <td routerLink="/invoice/{{invoice.id}}">{{invoice.numberOfInvoice}}</td>
+        <td routerLink="/invoice/{{invoice.id}}">{{invoice.dateOfCreation| date}}</td>
+        <td routerLink="/invoice/{{invoice.id}}">{{invoice.customerDate.name}}</td>
+        <td routerLink="/invoice/{{invoice.id}}">{{invoice.totalValue| currency:'PLN'}}</td>
+
+        <td routerLink="/invoice/{{invoice.id}}">
+          {{statusPayment(invoice.statusOfPayment)}}</td>
+
+        <td><button type="button" class="btn btn-secondary" routerLink="/editinvoice/{{invoice.id}}" ><i class="fas fa-edit"></i></button> &nbsp;
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalDelete" (click)="clickDelete(invoice)"  ><i class="fas fa-trash-alt"></i></button></td>
+      </tr>
+    </ng-container>
+
+    </tbody>
+
+
+  </table>
+  <p-paginator [rows]="10" (onPageChange)="paginate($event)" [totalRecords]="amountOfInvoice" [rowsPerPageOptions]="[10,15,20]"></p-paginator>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Potwierdz decyzje</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span *ngIf="invoiceToDelete!=null">
+        Czy napewno chcesz usunąć fakture nr {{invoiceToDelete.numberOfInvoice}} ?
+          </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteInvoice()">Tak</button>
+      </div>
+    </div>
+  </div>
+</div>

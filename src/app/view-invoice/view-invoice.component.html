@@ -1,2 +1,171 @@
-<p>view-invoice works!</p>
-<p> Param query równe {{paramQuery}}</p>
+<br>
+
+<div class="container"><div class="row" style="margin-bottom: 30px">
+  <div class="col-sm-1 offset-4">
+  <button class="btn btn-primary" (click)="back()">Powrót</button>
+
+  </div><div class="col-sm-1">
+  <button class="btn btn-primary" routerLink="/editinvoice/{{paramQuery}}">Edytuj</button>
+</div><div class="col-sm-1">
+<button class="btn btn-primary" (click)="download()">Pobierz</button>
+</div>
+  <div class="col-sm-1">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalDelete">Usuń</button>
+  </div>
+</div>
+</div>
+<div class="container faktura" id="content" #content>
+<br>
+
+  <div class="row">
+    <div class="col-sm-3 offset-9" style="text-align: center; margin-bottom: 30px">
+      <span class="nag">MIEJSCE WYSTAWIENIA</span><br>
+      {{invoice?.placeOfCreation}}<br>
+
+
+
+    </div>
+    <div class="col-sm-3 offset-9" style="text-align: center; margin-bottom: 30px">
+      <span class="nag">DATA STWORZENIA</span><br>
+      {{invoice.dateOfCreation| date}}<br>
+
+
+
+    </div>
+    <div class="col-sm-3 offset-9" style="text-align: center; margin-bottom: 50px">
+
+      <span class="nag">DATA SPRZEDAŻY</span><br>
+      {{invoice.dateOfSale| date}}<br>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4" style="text-align: center">
+      <span class="nag"> SPRZEDAWCA</span><br>
+      {{invoice.sellerData.name}}<br>
+      NIP: {{invoice.sellerData.nip}}<br>
+      {{invoice.sellerData.street}}<br>
+      {{invoice.sellerData.city}}
+      {{invoice.sellerData.postCode}}<br>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4" style="text-align: center">
+      <span class="nag">NABYWCA</span><br>
+      {{invoice.customerDate.name}}<br>
+      NIP: {{invoice.customerDate.nip}}<br>
+      {{invoice.customerDate.street}}<br>
+      {{invoice.customerDate.city}}
+      {{invoice.customerDate.postCode}}<br>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-12" style="text-align: center; margin-top: 10px; margin-bottom: 30px; font-size: large">
+        Faktura VAT {{invoice.numberOfInvoice}}</div>
+    </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Jm</th>
+          <th scope="col">Ilosc</th>
+          <th scope="col">Cena netto</th>
+          <th scope="col">Wartość netto</th>
+          <th scope="col">Stawka Vat</th>
+          <th scope="col">Kwota Vat</th>
+          <th scope="col">Wartośc brutto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pos of invoice.positionOnInvoiceList; index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{pos.name}}</td>
+          <td>{{pos.typeUnit}}</td>
+          <td>{{pos.quantity}}</td>
+          <td>{{pos.priceForUnit |currency:"PLN"}}</td>
+          <td>{{pos.priceForUnit*pos.quantity|currency:"PLN"}}</td>
+          <td>{{pos.taxRate}}%</td>
+          <td>{{pos.priceForUnit*pos.quantity*pos.taxRate*0.01|currency:"PLN"}}</td>
+          <td>{{pos.priceForUnit*pos.quantity*(pos.taxRate*0.01+1)|currency:"PLN"}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>W tym</td>
+          <td>{{totalNetto()|currency:"PLN"}}</td>
+          <td></td>
+          <td>{{totalVat()|currency:"PLN"}}</td>
+          <td>{{totalBrutto()|currency:"PLN"}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+
+
+</div>
+
+  <div class="row" style="margin-top: 30px;">
+    <div class="col-sm-5">
+      <span *ngIf="invoice.paid!=null">Zapłacono: {{invoice.paid|currency}}<br></span>
+      <span *ngIf="invoice.accountNumber!=null">Numer konta: {{invoice.accountNumber}}<br></span>
+      <span>Termin płatnośći: {{invoice.dayOfTransfer}}<br></span>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+      Sposob płatności: {{wayOfPayment(invoice.wayOfPayment)}}
+    </div>
+
+
+  </div>
+
+  <div class="row" style="margin-top: 150px;">
+    <div class="col-sm-5" style="border-top: 1px solid black">
+      Podpis osoby upoważnionej do wystawienia
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5" style="border-top: 1px solid black">
+      Podpis osoby upoważnionej do odbioru
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <span *ngIf="invoice.description!=null">Uwagi: {{invoice.description}}</span>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Potwierdz decyzje</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span *ngIf="invoice!=null">
+        Czy napewno chcesz usunąć fakture nr {{invoice.numberOfInvoice}} ?
+          </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nie</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteInvoice()">Tak</button>
+      </div>
+    </div>
+  </div>
+</div>

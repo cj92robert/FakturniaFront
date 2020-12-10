@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {UserRegister} from '../Models/UserRegister';
@@ -10,7 +10,7 @@ import {MessageService} from 'primeng/api';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   constructor(private userService: UserService, private router: Router, private messageService: MessageService) { }
@@ -30,5 +30,13 @@ export class RegisterComponent implements OnInit {
         this.messageService.add({severity: 'error', summary: 'Bład', detail: e.error.description});
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    document.querySelector('body').classList.add('login');
+  }
+
+  ngOnDestroy(): void {
+    document.querySelector('body').classList.remove('login');
   }
 }

@@ -1,0 +1,13 @@
+.invoice{
+
+  transition: all 0.2s ease-in-out;
+
+}
+.invoice:hover{
+
+  -webkit-box-shadow: 3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+  -moz-box-shadow:    3px 3px 30px 5px rgba(204, 204, 204, 0.9);
+  box-shadow:         3px 3px 30px 5px rgba(150, 150, 150, 0.9);
+  transform: scale(1.03);
+
+}

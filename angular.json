@@ -13,6 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@babel/runtime-corejs3/regenerator",
+              "raf",
+              "@babel/runtime-corejs3/core-js-stable/object/define-property",
+              "@babel/runtime-corejs3/core-js-stable/object/define-properties"
+              ],
             "outputPath": "dist/FakturniaFront",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -33,7 +39,8 @@
             "scripts": [
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jspdf-new/dist/jspdf.debug.js"
 
 
             ]

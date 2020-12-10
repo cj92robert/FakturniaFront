@@ -5,3 +5,7 @@ body.login{
 
 }
 
+body.contact{
+  background: -webkit-linear-gradient(left, #dddddd, #eeeeff);
+}
+

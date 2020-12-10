@@ -1,5 +1,6 @@
 import { DateCompany } from './DateCompany';
-import { PositionOnInvoice } from './positionOnInvoice';
+import {PositionOnInvoice} from './PositionOnInvoice';
+;
 
 
 export class Invoice {
@@ -17,6 +18,7 @@ export class Invoice {
   placeOfCreation?: string;
   positionOnInvoiceList: Array<PositionOnInvoice>;
   sellerData?: DateCompany;
+  totalValue?: number;
   statusOfPayment?: Invoice.StatusOfPaymentEnum;
   wayOfPayment?: Invoice.WayOfPaymentEnum;
 }
